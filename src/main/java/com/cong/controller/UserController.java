@@ -16,7 +16,7 @@ import com.cong.dto.TokenStatusDto;
 import com.cong.service.UserService;
 
 @RestController
-public class GatewayController {
+public class UserController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -43,11 +43,10 @@ public class GatewayController {
 	}
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-	public TokenDto authenticate(@RequestHeader(value = "phone_number", required = true) String phoneNumber,
-			@RequestHeader(value = "password", required = true) String password) {
+	public ResponseEntity<String> authenticate(@RequestHeader(value = "phone_number", required = true) String phoneNumber,
+			@RequestHeader(value = "auth_token", required = true) String authToken) {
 		logger.info("/authenticate Called");
-		return null;
-		// return UserService.authenticate(phoneNumber, password);
+		return UserService.authenticate(phoneNumber, authToken);
 	}
 
 	@RequestMapping(value = "/notAuthorized", method = { RequestMethod.GET, RequestMethod.POST })

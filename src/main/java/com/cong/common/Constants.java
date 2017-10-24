@@ -4,7 +4,6 @@ public class Constants {
 
 	public final static String IS_VALID_TOKEN_STR = "isValidToken";
 	public final static String IS_EXPIRED_TOKEN_STR = "isExpiredToken";
-	public final static String NOT_AVAILABLE_FOR_USER = "NotAvailableForUser";
 
 	public enum EncryptionAlgorithmsNames {
 		SECRET_KEY_GENERATOR_ALGORITHM_NAME("HmacSHA1"), ENCRYPTION_KEY_AGORITHM_NAME("DESede");

@@ -38,33 +38,33 @@ public class TokenDto {
 	}
 
 	/**
-	 * @return the userName
+	 * @return the firstName
 	 */
-	public String getUserName() {
+	public String getFirstName() {
 		return firstName;
 	}
 
 	/**
-	 * @param userName
-	 *            the userName to set
+	 * @param firstName
+	 *            the firstName to set
 	 */
-	public void setUserName(String userName) {
-		this.firstName = userName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	/**
-	 * @return the userId
+	 * @return the lastName
 	 */
-	public String getUserId() {
+	public String getLastName() {
 		return lastName;
 	}
 
 	/**
-	 * @param userId
-	 *            the userId to set
+	 * @param lastName
+	 *            the lastName to set
 	 */
-	public void setUserId(String userId) {
-		this.lastName = userId;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	/**
