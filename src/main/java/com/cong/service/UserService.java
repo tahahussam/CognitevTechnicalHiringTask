@@ -3,11 +3,15 @@ package com.cong.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cong.dao.UserRepository;
 import com.cong.dto.TokenDto;
 import com.cong.util.ValidationUtility;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -15,6 +19,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class UserService {
+
+	@Autowired
+	DataSource dataSource;
+
+	@Autowired
+	UserRepository userRepository;
 
 	public static ResponseEntity<String> addUser(String firstName, String lastName, String countryCode,
 			String phoneNumber, String gender, String birthdate, MultipartFile avatar, String email) {
