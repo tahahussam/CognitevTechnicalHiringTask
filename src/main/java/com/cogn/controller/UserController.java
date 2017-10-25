@@ -19,8 +19,8 @@ public class UserController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-//	@Autowired
-//	UserService userService;
+	@Autowired
+	UserService userService;
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	public ResponseEntity<String> addUser(@RequestParam(value = "first_name", required = true) String firstName,
@@ -34,16 +34,14 @@ public class UserController {
 
 		logger.info("/addUser Called");
 
-		//return userService.addUser(firstName, lastName, countryCode, phoneNumber, gender, birthdate, avatar, email);
-		return null;
+		return userService.addUser(firstName, lastName, countryCode, phoneNumber, gender, birthdate, avatar, email);
 	}
 
 	@RequestMapping(value = "/getToken", method = RequestMethod.POST)
 	public TokenDto getToken(@RequestHeader(value = "phone_number", required = true) String phoneNumber,
 			@RequestHeader(value = "password", required = true) String password) {
 		logger.info("/getToken Called");
-		//return userService.generateToken(phoneNumber, password);
-		return null;
+		return userService.generateToken(phoneNumber, password);
 	}
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
@@ -51,7 +49,6 @@ public class UserController {
 			@RequestHeader(value = "phone_number", required = true) String phoneNumber,
 			@RequestHeader(value = "auth_token", required = true) String authToken) {
 		logger.info("/authenticate Called");
-		//return userService.authenticate(phoneNumber, authToken);
-		return null;
+		return userService.authenticate(phoneNumber, authToken);
 	}
 }

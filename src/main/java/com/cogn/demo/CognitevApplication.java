@@ -1,16 +1,23 @@
 package com.cogn.demo;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.WebApplicationInitializer;
 
 import com.cogn.config.SecurityConfiguration;
 import com.cogn.controller.UserController;
-import com.cogn.service.UserService;
 
+//@Configuration
+@ComponentScan(basePackages = { "com.cogn.service" })
+// @EnableJpaRepositories(basePackageClasses = UserRepository.class)
+// @EnableTransactionManagement
 @SpringBootApplication
 public class CognitevApplication extends SpringBootServletInitializer implements WebApplicationInitializer {
 
@@ -24,17 +31,15 @@ public class CognitevApplication extends SpringBootServletInitializer implements
 	}
 
 	@Bean
-	public UserController UserController() {
-		return new UserController();
-	}
-
-	@Bean
-	public UserService UserService() {
-		return new UserService();
-	}
-
-	@Bean
 	public SecurityConfiguration securityConfiguration() {
 		return new SecurityConfiguration();
+	}
+
+	@Autowired
+	DataSource dataSource;
+
+	@Bean
+	public UserController UserController() {
+		return new UserController();
 	}
 }

@@ -1,19 +1,19 @@
 package com.cogn.dao;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cogn.entity.User;
 
-public interface UserRepository extends CrudRepository<User, String> {
+//@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
 
 	User findByPhoneNumber(String phoneNumber);
 
-	User findByPhoneNumberAndPassword(String phoneNumber, String password);
-
+	@SuppressWarnings("unchecked")
 	User save(User user);
 
 	@Modifying(clearAutomatically = true)

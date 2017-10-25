@@ -3,18 +3,15 @@ package com.cogn.service;
 import java.util.List;
 import java.util.Map;
 
-import javax.sql.DataSource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cogn.dao.UserRepository;
+import com.cogn.dao.JDBCUserRepo;
 import com.cogn.dto.StatusDto;
 import com.cogn.dto.TokenDto;
 import com.cogn.entity.User;
@@ -29,12 +26,10 @@ public class UserService {
 
 	private final static Logger logger = LoggerFactory.getLogger(UserService.class);
 
-	@Autowired
-	DataSource dataSource;
+	// @Autowired
+	// UserRepository userRepository;
 
-	@Autowired
-	UserRepository userRepository;
-
+	@Transactional
 	public ResponseEntity<String> addUser(String firstName, String lastName, String countryCode, String phoneNumber,
 			String gender, String birthdate, MultipartFile avatar, String email) {
 
@@ -66,11 +61,11 @@ public class UserService {
 		if (!ValidationUtility.isValidPhoneNumber(phoneNumber) || !ValidationUtility.isValidPassword(password))
 			return TokenHandler.generateInvalidToken();
 
-		User user = userRepository.findByPhoneNumber(phoneNumber);
+		User user = JDBCUserRepo.findByPhoneNumber(phoneNumber);
 		if (user != null) {
 			String encPassword = PasswordUtility.encrypt(password);
-			userRepository.updateUser(encPassword, phoneNumber);
-			return TokenHandler.generateToken(phoneNumber, user.getFirstName(), encPassword);
+			if (JDBCUserRepo.updateUser(encPassword, phoneNumber))
+				return TokenHandler.generateToken(phoneNumber, user.getFirstName(), encPassword);
 		}
 		return TokenHandler.generateInvalidToken();
 	}
@@ -79,7 +74,7 @@ public class UserService {
 		if (!ValidationUtility.isValidPhoneNumber(phoneNumber))
 			return new ResponseEntity<>("Phone number not valid", HttpStatus.BAD_REQUEST);
 
-		User user = userRepository.findByPhoneNumber(phoneNumber);
+		User user = JDBCUserRepo.findByPhoneNumber(phoneNumber);
 
 		if (user == null)
 			return new ResponseEntity<>("Phone number not exist", HttpStatus.BAD_REQUEST);
@@ -99,21 +94,22 @@ public class UserService {
 	private User saveUser(String firstName, String lastName, String countryCode, String phoneNumber, String gender,
 			String birthdate, MultipartFile avatar, String email) {
 		try {
-			return userRepository.save(new User(firstName, lastName, countryCode, phoneNumber, gender,
+			return JDBCUserRepo.saveUser(new User(firstName, lastName, countryCode, phoneNumber, gender,
 					DateUtility.convertFromStrToDate(birthdate), avatar.getName(), avatar.getBytes(), email));
 		} catch (Exception e) {
 			return null;
 		}
 	}
 
-//	public static void main(String[] args) throws JsonProcessingException {
-//
-//		ObjectMapper mapper = new ObjectMapper();
-//
-//		String jsonInString = mapper
-//				.writeValueAsString(ValidationUtility.validateParameters("", "", "", "", "", "", null, ""));
-//		System.out.println(jsonInString);
-//
-//	}
+	// public static void main(String[] args) throws JsonProcessingException {
+	//
+	// ObjectMapper mapper = new ObjectMapper();
+	//
+	// String jsonInString = mapper
+	// .writeValueAsString(ValidationUtility.validateParameters("", "", "", "",
+	// "", "", null, ""));
+	// System.out.println(jsonInString);
+	//
+	// }
 
 }

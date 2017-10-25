@@ -1,16 +1,17 @@
 package com.cogn.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "User")
-public class User {
+//@Entity
+//@Table(name = "User", catalog = "test")
+public class User implements Serializable {
+
+	private static final long serialVersionUID = 5425628681542795167L;
 
 	public User(String firstName, String lastName, String countryCode, String phoneNumber, String gender,
 			Date birthDate, String avatarName, byte[] avatar, String email) {
@@ -28,7 +29,7 @@ public class User {
 
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private Long id;
 
 	@Column(name = "first_name", nullable = false)
 	private String firstName;
@@ -88,6 +89,10 @@ public class User {
 		return email;
 	}
 
+	public String getAvatarName() {
+		return avatarName;
+	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -131,6 +136,10 @@ public class User {
 		this.email = email;
 	}
 
+	public void setAvatarName(String avatarName) {
+		this.avatarName = avatarName;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -138,4 +147,27 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", countryCode=" + countryCode
+				+ ", phoneNumber=" + phoneNumber + ", gender=" + gender + ", birthDate=" + birthDate + ", avatarName="
+				+ avatarName + ", email=" + email + "]";
+	}
+
 }
