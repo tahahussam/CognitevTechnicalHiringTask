@@ -1,4 +1,4 @@
-package com.cong.util;
+package com.cogn.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,11 +25,6 @@ public class ValidationUtility {
 	}
 
 	public static boolean isValidPhoneNumber(String phoneNumber) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public static boolean isValidToken(String authToken) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -71,6 +66,11 @@ public class ValidationUtility {
 	private static Map<String, List<Map<String, String>>> validatBirthdate(String birthdate) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public static boolean isValidPassword(String password) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	private static Map<String, List<Map<String, String>>> validatGender(String gender) {
@@ -126,5 +126,4 @@ public class ValidationUtility {
 		error.put(errorStr, cause);
 		return error;
 	}
-
 }

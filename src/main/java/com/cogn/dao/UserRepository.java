@@ -1,4 +1,4 @@
-package com.cong.dao;
+package com.cogn.dao;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cong.entity.User;
+import com.cogn.entity.User;
 
 public interface UserRepository extends CrudRepository<User, String> {
 

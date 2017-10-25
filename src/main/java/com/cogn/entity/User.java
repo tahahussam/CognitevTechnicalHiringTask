@@ -1,4 +1,6 @@
-package com.cong.entity;
+package com.cogn.entity;
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,20 @@ import javax.persistence.Table;
 @Table(name = "User")
 public class User {
 
+	public User(String firstName, String lastName, String countryCode, String phoneNumber, String gender,
+			Date birthDate, String avatarName, byte[] avatar, String email) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.countryCode = countryCode;
+		this.phoneNumber = phoneNumber;
+		this.gender = gender;
+		this.birthDate = birthDate;
+		this.avatarName = avatarName;
+		this.avatar = avatar;
+		this.email = email;
+	}
+
 	@Id
 	@GeneratedValue
 	private Integer id;
@@ -20,8 +36,8 @@ public class User {
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
 
-	@Column(name = "code_country", nullable = false)
-	private String codeCountry;
+	@Column(name = "country_code", nullable = false)
+	private String countryCode;
 
 	@Column(name = "phone_number", unique = true, nullable = false)
 	private String phoneNumber;
@@ -30,7 +46,10 @@ public class User {
 	private String gender;
 
 	@Column(nullable = false)
-	private String birthDate;
+	private Date birthDate;
+
+	@Column(name = "avatar_name", nullable = false)
+	private String avatarName;
 
 	@Column(nullable = false)
 	private byte[] avatar;
@@ -49,10 +68,6 @@ public class User {
 		return lastName;
 	}
 
-	public String getCodeCountry() {
-		return codeCountry;
-	}
-
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -61,7 +76,7 @@ public class User {
 		return gender;
 	}
 
-	public String getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
@@ -81,8 +96,19 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public void setCodeCountry(String codeCountry) {
-		this.codeCountry = codeCountry;
+	/**
+	 * @return the countryCode
+	 */
+	public String getCountryCode() {
+		return countryCode;
+	}
+
+	/**
+	 * @param countryCode
+	 *            the countryCode to set
+	 */
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
 	}
 
 	public void setPhoneNumber(String phoneNumber) {
@@ -93,7 +119,7 @@ public class User {
 		this.gender = gender;
 	}
 
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 

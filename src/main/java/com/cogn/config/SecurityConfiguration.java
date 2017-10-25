@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.cong.config;
+package com.cogn.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;

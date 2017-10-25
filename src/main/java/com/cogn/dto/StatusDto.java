@@ -1,17 +1,19 @@
-package com.cong.dto;
+package com.cogn.dto;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JWTInfoDto {
+import com.cogn.entity.User;
+
+public class StatusDto {
 	public boolean isValid;
-	public boolean isExpired;
+	public User user;
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	public JWTInfoDto(boolean isValid, boolean isExpired) {
+	public StatusDto(boolean isValid, User user) {
 		super();
 		this.isValid = isValid;
-		this.isExpired = isExpired;
+		this.user = user;
 
 		logger.info("JWTValidStatusDto Created with isValid = " + isValid);
 	}

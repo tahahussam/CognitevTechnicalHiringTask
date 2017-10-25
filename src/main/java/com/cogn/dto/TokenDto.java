@@ -1,4 +1,4 @@
-package com.cong.dto;
+package com.cogn.dto;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,14 +9,14 @@ public class TokenDto {
 
 	private boolean isValid;
 	private String firstName;
-	private String lastName;
+	private String phone;
 	private String token;
 
-	public TokenDto(boolean isValid, String firstName, String lastName, String token) {
+	public TokenDto(boolean isValid, String firstName, String phone, String token) {
 		super();
 		this.isValid = isValid;
 		this.firstName = firstName;
-		this.lastName = lastName;
+		this.setPhone(phone);
 		this.token = token;
 
 		logger.info("TokenDto created with valid status = " + this.isValid);
@@ -53,18 +53,17 @@ public class TokenDto {
 	}
 
 	/**
-	 * @return the lastName
+	 * @return phone
 	 */
-	public String getLastName() {
-		return lastName;
+	public String getPhone() {
+		return phone;
 	}
 
 	/**
-	 * @param lastName
-	 *            the lastName to set
+	 * @param phone
 	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	/**
@@ -89,7 +88,7 @@ public class TokenDto {
 	 */
 	@Override
 	public String toString() {
-		return "TokenDto [isValid=" + isValid + ", userName=" + firstName + ", userId=" + lastName + ", token=" + token
+		return "TokenDto [isValid=" + isValid + ", firstName=" + firstName + ", phone=" + phone + ", token=" + token
 				+ "]";
 	}
 

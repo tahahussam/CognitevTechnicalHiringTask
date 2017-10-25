@@ -1,4 +1,4 @@
-package com.cong.demo;
+package com.cogn.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,8 +7,9 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.WebApplicationInitializer;
 
-import com.cong.config.SecurityConfiguration;
-import com.cong.controller.UserController;
+import com.cogn.config.SecurityConfiguration;
+import com.cogn.controller.UserController;
+import com.cogn.service.UserService;
 
 @SpringBootApplication
 public class CognitevApplication extends SpringBootServletInitializer implements WebApplicationInitializer {
@@ -25,6 +26,11 @@ public class CognitevApplication extends SpringBootServletInitializer implements
 	@Bean
 	public UserController UserController() {
 		return new UserController();
+	}
+
+	@Bean
+	public UserService UserService() {
+		return new UserService();
 	}
 
 	@Bean
