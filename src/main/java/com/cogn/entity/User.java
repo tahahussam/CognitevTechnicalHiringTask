@@ -3,12 +3,6 @@ package com.cogn.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-//@Entity
-//@Table(name = "User", catalog = "test")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 5425628681542795167L;
@@ -27,38 +21,26 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	@Id
-	@GeneratedValue
 	private Long id;
 
-	@Column(name = "first_name", nullable = false)
 	private String firstName;
 
-	@Column(name = "last_name", nullable = false)
 	private String lastName;
 
-	@Column(name = "country_code", nullable = false)
 	private String countryCode;
 
-	@Column(name = "phone_number", unique = true, nullable = false)
 	private String phoneNumber;
 
-	@Column(nullable = false)
 	private String gender;
 
-	@Column(nullable = false)
 	private Date birthDate;
 
-	@Column(name = "avatar_name", nullable = false)
 	private String avatarName;
 
-	@Column(nullable = false)
 	private byte[] avatar;
 
-	@Column(nullable = true)
 	private String email;
 
-	@Column(nullable = true)
 	private String password;
 
 	public String getFirstName() {

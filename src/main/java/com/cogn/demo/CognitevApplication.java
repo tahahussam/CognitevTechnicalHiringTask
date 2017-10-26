@@ -14,10 +14,7 @@ import org.springframework.web.WebApplicationInitializer;
 import com.cogn.config.SecurityConfiguration;
 import com.cogn.controller.UserController;
 
-//@Configuration
 @ComponentScan(basePackages = { "com.cogn.service" })
-// @EnableJpaRepositories(basePackageClasses = UserRepository.class)
-// @EnableTransactionManagement
 @SpringBootApplication
 public class CognitevApplication extends SpringBootServletInitializer implements WebApplicationInitializer {
 

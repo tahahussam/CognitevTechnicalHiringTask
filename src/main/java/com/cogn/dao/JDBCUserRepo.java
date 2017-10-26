@@ -22,6 +22,10 @@ public class JDBCUserRepo {
 	private static final String DB_USER = "dev";
 	private static final String DB_PASSWORD = "dev";
 
+	public static void main(String[] args) {
+		updateUser("123", "011");
+	}
+	
 	public static User saveUser(User user) {
 
 		Connection dbConnection = null;

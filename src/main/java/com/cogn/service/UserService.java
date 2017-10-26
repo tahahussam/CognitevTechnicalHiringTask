@@ -26,9 +26,6 @@ public class UserService {
 
 	private final static Logger logger = LoggerFactory.getLogger(UserService.class);
 
-	// @Autowired
-	// UserRepository userRepository;
-
 	@Transactional
 	public ResponseEntity<String> addUser(String firstName, String lastName, String countryCode, String phoneNumber,
 			String gender, String birthdate, MultipartFile avatar, String email) {
