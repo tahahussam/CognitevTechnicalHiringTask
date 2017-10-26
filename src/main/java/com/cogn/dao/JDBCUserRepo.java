@@ -22,10 +22,6 @@ public class JDBCUserRepo {
 	private static final String DB_USER = "dev";
 	private static final String DB_PASSWORD = "dev";
 
-	public static void main(String[] args) {
-		updateUser("123", "011");
-	}
-	
 	public static User saveUser(User user) {
 
 		Connection dbConnection = null;
@@ -45,8 +41,8 @@ public class JDBCUserRepo {
 			preparedStatement.setString(5, user.getGender());
 			preparedStatement.setDate(6, new java.sql.Date(user.getBirthDate().getTime()));
 			preparedStatement.setString(7, user.getEmail());
-			preparedStatement.setBytes(8, user.getAvatar());
-			preparedStatement.setString(9, user.getEmail());
+			preparedStatement.setString(8, user.getAvatarName());
+			preparedStatement.setBytes(9, user.getAvatar());
 
 			// execute insert SQL stetement
 			preparedStatement.executeUpdate();
@@ -95,9 +91,53 @@ public class JDBCUserRepo {
 			ResultSet rs = preparedStatement.executeQuery();
 
 			if (rs.next()) {
-				return new User(rs.getString("first_name"), rs.getString("last_name"), rs.getString("country_code"),
-						rs.getString("phone_number"), rs.getString("gender"), rs.getDate("birthdate"),
-						rs.getString("email"), rs.getBytes("avatar_data"), rs.getString("email"));
+				return new User(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name"),
+						rs.getString("country_code"), rs.getString("phone_number"), rs.getString("gender"),
+						rs.getDate("birthdate"), rs.getString("email"), rs.getBytes("avatar_data"),
+						rs.getString("email"), rs.getString("password"));
+			}
+			return null;
+		} catch (SQLException e) {
+			logger.error(e.getMessage(), e);
+
+		} finally {
+			if (preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					logger.error(e.getMessage(), e);
+				}
+			}
+			if (dbConnection != null) {
+				try {
+					dbConnection.close();
+				} catch (SQLException e) {
+					logger.error(e.getMessage(), e);
+				}
+			}
+		}
+		return null;
+	}
+
+	public static User findByUserByEmail(String email) {
+		Connection dbConnection = null;
+		PreparedStatement preparedStatement = null;
+
+		String getUser = "select * from test.user where email = ?";
+
+		try {
+			dbConnection = getDBConnection();
+			preparedStatement = dbConnection.prepareStatement(getUser);
+
+			preparedStatement.setString(1, email);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			if (rs.next()) {
+				return new User(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name"),
+						rs.getString("country_code"), rs.getString("phone_number"), rs.getString("gender"),
+						rs.getDate("birthdate"), rs.getString("email"), rs.getBytes("avatar_data"),
+						rs.getString("email"), rs.getString("password"));
 			}
 			return null;
 		} catch (SQLException e) {

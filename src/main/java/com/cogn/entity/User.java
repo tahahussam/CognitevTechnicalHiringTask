@@ -3,6 +3,9 @@ package com.cogn.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 5425628681542795167L;
@@ -21,6 +24,13 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
+	public User(long id, String firstName, String lastName, String countryCode, String phoneNumber, String gender,
+			Date birthDate, String avatarName, byte[] avatar, String email, String password) {
+		this(firstName, lastName, countryCode, phoneNumber, gender, birthDate, avatarName, avatar, email);
+		this.id = id;
+		this.password = password;
+	}
+
 	private Long id;
 
 	private String firstName;
@@ -33,14 +43,16 @@ public class User implements Serializable {
 
 	private String gender;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date birthDate;
 
+	@JsonIgnore
 	private String avatarName;
-
+	@JsonIgnore
 	private byte[] avatar;
-
+	@JsonIgnore
 	private String email;
-
+	@JsonIgnore
 	private String password;
 
 	public String getFirstName() {
@@ -83,17 +95,10 @@ public class User implements Serializable {
 		this.lastName = lastName;
 	}
 
-	/**
-	 * @return the countryCode
-	 */
 	public String getCountryCode() {
 		return countryCode;
 	}
 
-	/**
-	 * @param countryCode
-	 *            the countryCode to set
-	 */
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
@@ -130,17 +135,10 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	/**
-	 * @return the id
-	 */
 	public Long getId() {
 		return id;
 	}
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
 	public void setId(Long id) {
 		this.id = id;
 	}

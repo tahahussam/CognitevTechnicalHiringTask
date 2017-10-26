@@ -25,11 +25,11 @@ public class TokenHandler {
 	public static TokenDto generateToken(String phoneNumber, String firstName, String password) {
 		logger.debug("in generateToken with phoneNumber: " + phoneNumber + " and firstName: " + firstName);
 
-		return new TokenDto(true, firstName, phoneNumber, createJWT(phoneNumber, firstName, password));
+		return new TokenDto("valid", firstName, phoneNumber, createJWT(phoneNumber, firstName, password));
 	}
 
-	public static TokenDto generateInvalidToken() {
-		return new TokenDto(false, null, null, null);
+	public static TokenDto generateInvalidToken(String error) {
+		return new TokenDto(error, null, null, null);
 	}
 
 	public static boolean isValidToken(String accessToken, String encPassword, String phoneNumber) {

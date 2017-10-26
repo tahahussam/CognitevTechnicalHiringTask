@@ -7,34 +7,19 @@ public class TokenDto {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private boolean isValid;
+	private String status;
 	private String firstName;
 	private String phone;
 	private String token;
 
-	public TokenDto(boolean isValid, String firstName, String phone, String token) {
+	public TokenDto(String status, String firstName, String phone, String token) {
 		super();
-		this.isValid = isValid;
+		this.setStatus(status);
 		this.firstName = firstName;
 		this.setPhone(phone);
 		this.token = token;
 
-		logger.info("TokenDto created with valid status = " + this.isValid);
-	}
-
-	/**
-	 * @return the isValid
-	 */
-	public boolean isValid() {
-		return isValid;
-	}
-
-	/**
-	 * @param isValid
-	 *            the isValid to set
-	 */
-	public void setValid(boolean isValid) {
-		this.isValid = isValid;
+		logger.info("TokenDto created with valid status = " + this.status);
 	}
 
 	/**
@@ -81,6 +66,14 @@ public class TokenDto {
 		this.token = token;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -88,7 +81,7 @@ public class TokenDto {
 	 */
 	@Override
 	public String toString() {
-		return "TokenDto [isValid=" + isValid + ", firstName=" + firstName + ", phone=" + phone + ", token=" + token
+		return "TokenDto [status=" + status + ", firstName=" + firstName + ", phone=" + phone + ", token=" + token
 				+ "]";
 	}
 

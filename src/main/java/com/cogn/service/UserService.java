@@ -56,7 +56,8 @@ public class UserService {
 	@Transactional(readOnly = true)
 	public TokenDto generateToken(String phoneNumber, String password) {
 		if (!ValidationUtility.isValidPhoneNumber(phoneNumber) || !ValidationUtility.isValidPassword(password))
-			return TokenHandler.generateInvalidToken();
+			return TokenHandler
+					.generateInvalidToken("Not valid phone number or password (valid passwords starts from 6 chars)");
 
 		User user = JDBCUserRepo.findByPhoneNumber(phoneNumber);
 		if (user != null) {
@@ -64,7 +65,7 @@ public class UserService {
 			if (JDBCUserRepo.updateUser(encPassword, phoneNumber))
 				return TokenHandler.generateToken(phoneNumber, user.getFirstName(), encPassword);
 		}
-		return TokenHandler.generateInvalidToken();
+		return TokenHandler.generateInvalidToken("Not found phone number");
 	}
 
 	public ResponseEntity<String> authenticate(String phoneNumber, String authToken) {
@@ -92,7 +93,8 @@ public class UserService {
 			String birthdate, MultipartFile avatar, String email) {
 		try {
 			return JDBCUserRepo.saveUser(new User(firstName, lastName, countryCode, phoneNumber, gender,
-					DateUtility.convertFromStrToDate(birthdate), avatar.getName(), avatar.getBytes(), email));
+					DateUtility.convertFromStrToDate(birthdate), avatar.getOriginalFilename(), avatar.getBytes(),
+					email));
 		} catch (Exception e) {
 			return null;
 		}

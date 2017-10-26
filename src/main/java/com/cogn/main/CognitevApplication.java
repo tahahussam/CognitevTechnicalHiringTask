@@ -1,4 +1,4 @@
-package com.cogn.demo;
+package com.cogn.main;
 
 import javax.sql.DataSource;
 
